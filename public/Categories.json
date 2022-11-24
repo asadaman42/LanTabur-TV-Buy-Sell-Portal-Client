@@ -1,0 +1,83 @@
+[
+    {
+        "categoryName": "Vision",
+        "products": [
+            {
+                "picture": "https://vision.com.bd/images/detailed/28/873073,_Vision_32_LED_TV_M03_Ultimate.jpg",
+                "name": "VISION 32 inch LED TV M03 Ultimate",
+                "location": "Bansree, Dhaka",
+                "reesalePrice": "15,000",
+                "OriginalPrice": "19,350",
+                "yearsOfUse": "2 years",
+                "postingTime": "Posting Time",
+                "sellerName": "Seller Name",
+                "isVerified": "true"
+            },
+            {
+                "picture": "picture 1",
+                "name": "name 1",
+                "location": "location 1",
+                "reesalePrice": "resale Price1",
+                "OriginalPrice": "Original Price1",
+                "yearsOfUse": "years Of Use1",
+                "postingTime": "Posting Time",
+                "sellerName": "Seller Name",
+                "isVerified": "true"
+            }
+        ]
+    },
+    {
+        "categoryName": "Walton",
+        "products": [
+            {
+                "picture": "picture 1",
+                "name": "name 1",
+                "location": "location 1",
+                "reesalePrice": "resale Price1",
+                "OriginalPrice": "Original Price1",
+                "yearsOfUse": "years Of Use1",
+                "postingTime": "Posting Time",
+                "sellerName": "Seller Name",
+                "isVerified": "true"
+            },
+            {
+                "picture": "picture 1",
+                "name": "name 1",
+                "location": "location 1",
+                "reesalePrice": "resale Price1",
+                "OriginalPrice": "Original Price1",
+                "yearsOfUse": "years Of Use1",
+                "postingTime": "Posting Time",
+                "sellerName": "Seller Name",
+                "isVerified": "true"
+            }
+        ]
+    },
+    {
+        "categoryName": "Toshiba",
+        "products": [
+            {
+                "picture": "picture 1",
+                "name": "name 1",
+                "location": "location 1",
+                "reesalePrice": "resale Price1",
+                "OriginalPrice": "Original Price1",
+                "yearsOfUse": "years Of Use1",
+                "postingTime": "Posting Time",
+                "sellerName": "Seller Name",
+                "isVerified": "true"
+            },
+            {
+                "picture": "picture 1",
+                "name": "name 1",
+                "location": "location 1",
+                "reesalePrice": "resale Price1",
+                "OriginalPrice": "Original Price1",
+                "yearsOfUse": "years Of Use1",
+                "postingTime": "Posting Time",
+                "sellerName": "Seller Name",
+                "isVerified": "true"
+            }
+        ]
+    }
+]
