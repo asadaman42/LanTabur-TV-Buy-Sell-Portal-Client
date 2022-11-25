@@ -1,10 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { GoVerified } from "react-icons/go";
 
 const Category = () => {
     const category = useLoaderData();
     const { categoryName, products } = category;
+    const [modalInfo, setModalInfo] = useState({});
+    console.log(modalInfo);
+    const { name } = modalInfo;
+    // console.log(OriginalPrice);
 
 
 
@@ -36,7 +40,7 @@ const Category = () => {
                                 {
                                     isVerified &&
                                     <div className="card-actions justify-center">
-                                        <button className="btn btn-primary">Book Now</button>
+                                        <label onClick={() => setModalInfo(product)} htmlFor="booking-modal" className="btn btn-primary">Book Now</label>
                                     </div>
                                 }
                             </div>
@@ -45,18 +49,29 @@ const Category = () => {
                 }
                 )}
             </div>
-            {/* The button to open modal */}
-            <label htmlFor="booking-modal" className="btn">open modal</label>
 
-            {/* Put this part before </body> tag */}
-            <input type="checkbox" id="booking-modal" className="modal-toggle" />
-            <div className="modal">
-                <div className="modal-box relative">
-                    <label htmlFor="booking-modal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-                    <h3 className="text-lg font-bold">Congratulations random Internet user!</h3>
-                    <p className="py-4">You've been selected for a chance to get one year of subscription to use Wikipedia for free!</p>
-                </div>
-            </div>
+            {modalInfo &&
+                <div>
+                    <input type="checkbox" id="booking-modal" className="modal-toggle" />
+                    <div className="modal">
+                        <div className="modal-box relative">
+                            <label htmlFor="booking-modal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
+                            <h3 className="text-lg font-bold"> {name} </h3>
+                            <form className='mx-auto my-10'>
+
+                                {/* <input type="text" disabled value={format(selectDate, 'PPPP')} className="input w-full input-bordered  my-2" /> */}
+
+                                <input name='name' type="text" disabled value='User Name' className="input w-full input-bordered my-2" />
+                                <input name='email' type="email" disabled value="Your Email" className="input w-full input-bordered my-2" />
+                                <input name='text' type="price" disabled value="reesalePrice" className="input w-full input-bordered my-2" />
+                                <input name='phone' type="text" placeholder="Phone Number" className="input w-full input-bordered my-2" />
+                                <input name='phone' type="text" placeholder="Location" className="input w-full input-bordered my-2" />
+                                <button className='w-full btn btn-accent text-white' type="submit"> Submit </button>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>}
 
         </div>
     );

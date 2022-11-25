@@ -1,15 +1,28 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link, Navigate } from 'react-router-dom';
+import { UniversalContext } from '../ContexSupplier/ContexSupplier';
 
 const Navbar = () => {
+    const { user, logOut } = useContext(UniversalContext);
+
+    const signOut = () => {
+        <Navigate to='/'></Navigate>
+        logOut()
+            .then(() => { })
+            .catch(error => console.error(error));
+    }
 
     const menuItems = <React.Fragment>
         <li><Link to='/'>Home</Link></li>
-        <li><Link to='/'>Appoinment</Link></li>
-        <li><Link to='/'>About</Link></li>
-        <li><Link to='/'>Reviews</Link></li>
-        <li><Link to='/'>Log In</Link></li>
-
+        {
+            user ?
+                <>
+                    <li><button onClick={signOut} className='btn btn-primary'>Log Out</button></li>
+                    <li><button onClick={signOut} className='btn btn-primary'>Log Out</button></li>
+                </>
+                :
+                <li className='btn btn-primary rounded-2xl'> <Link to='/login'>Log In</Link> </li>
+        }
     </React.Fragment>
     return (
         <div className="navbar flex justify-between">
@@ -28,7 +41,7 @@ const Navbar = () => {
                 <ul className="menu menu-horizontal p-0">
                     {menuItems}
                 </ul>
-            </div>            
+            </div>
         </div>
     );
 };
