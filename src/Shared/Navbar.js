@@ -17,11 +17,12 @@ const Navbar = () => {
         {
             user ?
                 <>
-                    <li><button onClick={signOut} className='btn btn-primary'>Log Out</button></li>
-                    <li><button onClick={signOut} className='btn btn-primary'>Dashboard </button></li>
+                    <li><Link to='/dashboard'>Dashboard</Link></li>
+                    <button onClick={signOut} className='btn btn-primary m-1'>Log Out</button>
+                    
                 </>
                 :
-                <li className='btn btn-primary rounded-2xl'> <Link to='/login'>Log In</Link> </li>
+                <li className='btn btn-primary m-1 rounded-2xl'> <Link to='/login'>Log In</Link> </li>
         }
     </React.Fragment>
     return (
@@ -35,7 +36,7 @@ const Navbar = () => {
                         {menuItems}
                     </ul>
                 </div>
-                <Link to='/' className="btn btn-ghost normal-case text-xl">Doctor's Portal</Link>
+                <Link to='/' className="btn btn-ghost normal-case text-xl">LanTabur TV Buy Sell Portal</Link>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal p-0">

@@ -48,10 +48,11 @@ const ContexSupplier = ({ children }) => {
     }, []);
 
     const contextInformation = {
+        createUserByEmailAndPassword,
         user,        
         googleLogInProvider,
         logOut,
-        createUserByEmailAndPassword,
+        
         emailLoginProvider,
         loading,
         setLoading,
