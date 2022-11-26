@@ -2,14 +2,18 @@ import React, { useContext, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { GoVerified } from "react-icons/go";
 import { UniversalContext } from '../ContexSupplier/ContexSupplier';
+import { format } from 'date-fns';
+import { useForm } from 'react-hook-form';
+
 
 const Category = () => {
+    const { register, handleSubmit } = useForm
     const { user } = useContext(UniversalContext);
     const category = useLoaderData();
     const { categoryName, products } = category;
     const [modalInfo, setModalInfo] = useState({});
     console.log(modalInfo);
-    const { name } = modalInfo;
+    const { name, reesalePrice } = modalInfo;
     const date = new Date();
     console.log(date);
 
@@ -61,16 +65,13 @@ const Category = () => {
                             <label htmlFor="booking-modal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
                             <h3 className="text-lg font-bold"> {name} </h3>
                             <form className='mx-auto my-10'>
-
-                                {/* <input type="text" disabled value={format(selectDate, 'PPPP')} className="input w-full input-bordered  my-2" /> */}
-
-                                <input name='name' type="text" disabled value={user?.displayName} className="input w-full input-bordered my-2" />
-                                <input name='email' type="email" disabled value={user?.email} className="input w-full input-bordered my-2" />
-                                <input name='text' type="price" disabled value="reesalePrice" className="input w-full input-bordered my-2" />
-                                <input name='phone' type="text" placeholder="Phone Number" className="input w-full input-bordered my-2" />
-                                <input name='phone' type="text" placeholder="Location" className="input w-full input-bordered my-2" />
+                                <input type="email" disabled value={user?.email} className="input w-full input-bordered my-2" />
+                                <input type="text" disabled value={format(date, 'PPPP')} className="input w-full input-bordered  my-2" />
+                                <input type="text" disabled value={user?.displayName} className="input w-full input-bordered my-2" />
+                                <input type="text" disabled value={reesalePrice} className="input w-full input-bordered my-2" />
+                                <input type="text" placeholder="Phone Number" className="input w-full input-bordered my-2" />
+                                <input type="text" placeholder="Location" className="input w-full input-bordered my-2" />
                                 <button className='w-full btn btn-accent text-white' type="submit"> Submit </button>
-
                             </form>
                         </div>
                     </div>
