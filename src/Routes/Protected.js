@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { UniversalContext } from '../ContexSupplier/ContexSupplier';
 
-import { FidgetSpinner } from 'react-loader-spinner'
+import { FidgetSpinner } from ''
 
 
 const Protected = ({ children }) => {
