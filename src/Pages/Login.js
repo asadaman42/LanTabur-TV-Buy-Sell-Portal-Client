@@ -24,15 +24,16 @@ const Login = () => {
 
     // react hook form operation and sign in via Email
     const onSubmit = (data, e) => {
-
         const { email, password } = data;
+
+        setLoginError('');
 
         emailLoginProvider(email, password)
             .then(result => {
 
                 // e.target.reset();
-                setLoginError('');
-                // navigate(from, { replace: true });
+                
+                navigate(from, { replace: true });
                 // toast.success('Login Successful');
             })
             .catch(error => {

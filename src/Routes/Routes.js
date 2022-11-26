@@ -5,6 +5,7 @@ import Dashboard from "../Pages/Dashboard/Dashboard";
 import Homepage from "../Pages/Homepage/Homepage";
 import Login from "../Pages/Login";
 import Register from "../Pages/Register";
+import Protected from "./Protected";
 
 
 
@@ -35,7 +36,7 @@ export const router = createBrowserRouter([
 
     {
         path: '/dashboard',
-        element: <Dashboard></Dashboard>,
+        element: <Protected><Dashboard></Dashboard></Protected>,
         children: [
             {
                 path: '/dashboard',
