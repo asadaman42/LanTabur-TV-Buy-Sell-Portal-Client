@@ -1,14 +1,17 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import { GoVerified } from "react-icons/go";
+import { UniversalContext } from '../ContexSupplier/ContexSupplier';
 
 const Category = () => {
+    const { user } = useContext(UniversalContext);
     const category = useLoaderData();
     const { categoryName, products } = category;
     const [modalInfo, setModalInfo] = useState({});
     console.log(modalInfo);
     const { name } = modalInfo;
-    // console.log(OriginalPrice);
+    const date = new Date();
+    console.log(date);
 
 
 
@@ -33,7 +36,7 @@ const Category = () => {
                                 <p>yearsOfUse: {yearsOfUse} </p>
                                 {
                                     isVerified ?
-                                        <p>sellerName: {sellerName}<GoVerified className='text-blue-600 inline-flex ml-1' /> </p>
+                                        <p>sellerName:{sellerName}<GoVerified className='text-blue-600 inline-flex ml-1' /> </p>
                                         :
                                         <p>sellerName: {sellerName} </p>
                                 }
@@ -61,8 +64,8 @@ const Category = () => {
 
                                 {/* <input type="text" disabled value={format(selectDate, 'PPPP')} className="input w-full input-bordered  my-2" /> */}
 
-                                <input name='name' type="text" disabled value='User Name' className="input w-full input-bordered my-2" />
-                                <input name='email' type="email" disabled value="Your Email" className="input w-full input-bordered my-2" />
+                                <input name='name' type="text" disabled value={user?.displayName} className="input w-full input-bordered my-2" />
+                                <input name='email' type="email" disabled value={user?.email} className="input w-full input-bordered my-2" />
                                 <input name='text' type="price" disabled value="reesalePrice" className="input w-full input-bordered my-2" />
                                 <input name='phone' type="text" placeholder="Phone Number" className="input w-full input-bordered my-2" />
                                 <input name='phone' type="text" placeholder="Location" className="input w-full input-bordered my-2" />

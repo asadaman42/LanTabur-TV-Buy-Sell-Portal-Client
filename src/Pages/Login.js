@@ -30,21 +30,15 @@ const Login = () => {
 
         emailLoginProvider(email, password)
             .then(result => {
-
-                // e.target.reset();
-                
                 navigate(from, { replace: true });
+                // e.target.reset();
                 // toast.success('Login Successful');
             })
-            .catch(error => {
-                console.error(error)
-                setLoginError(error.message);
-            })
+            .catch(error => setLoginError(error.message))
             .finally(() => {
                 // setLoading(false);
             })
     }
-
 
     // for google sign in firbase auth
     const googleProvider = new GoogleAuthProvider();

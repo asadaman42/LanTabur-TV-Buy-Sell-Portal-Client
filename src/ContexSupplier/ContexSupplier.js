@@ -52,11 +52,12 @@ const ContexSupplier = ({ children }) => {
         emailLoginProvider,
         user,
         updatePhotoAndName,
+        loading,
 
 
         googleLogInProvider,
         logOut,
-        loading,
+        
         setLoading,
                 
         setUser

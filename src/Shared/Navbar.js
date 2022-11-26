@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Link, useNavigate,  } from 'react-router-dom';
+import { Link, useNavigate, } from 'react-router-dom';
 import { UniversalContext } from '../ContexSupplier/ContexSupplier';
 
 const Navbar = () => {
@@ -7,12 +7,9 @@ const Navbar = () => {
     const navigate = useNavigate();
 
     const signOut = () => {
-        navigate("/dashboard");
-
         // <Navigate to='/dashboard'></Navigate>
-        logOut()
-            .then(() => { })
-            .catch(error => console.error(error));
+        navigate("/");
+        logOut().then(() => { }).catch(error => console.error(error));
     }
 
     const menuItems = <React.Fragment>
