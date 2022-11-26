@@ -7,19 +7,43 @@ import { FaGoogle } from "react-icons/fa";
 import { GoogleAuthProvider } from 'firebase/auth';
 
 const Login = () => {
-    // React Hook Form
-    const { register, handleSubmit, formState: {errors} } = useForm();
 
     // Import Context
     const { emailLoginProvider, googleLogInProvider, setLoading } = useContext(UniversalContext);
 
     // for Error Handling
-    const [error, setError] = useState('')
+    const [loginError, setLoginError] = useState('')
 
     // navigate user from where he came
     const location = useLocation();
     const from = location.state?.from?.pathname || '/';
     const navigate = useNavigate();
+
+    // React Hook Form
+    const { register, handleSubmit, formState: { errors } } = useForm();
+
+    // react hook form operation and sign in via Email
+    const onSubmit = (data, e) => {
+
+        const { email, password } = data;
+
+        emailLoginProvider(email, password)
+            .then(result => {
+
+                // e.target.reset();
+                setLoginError('');
+                // navigate(from, { replace: true });
+                // toast.success('Login Successful');
+            })
+            .catch(error => {
+                console.error(error)
+                setLoginError(error.message);
+            })
+            .finally(() => {
+                // setLoading(false);
+            })
+    }
+
 
     // for google sign in firbase auth
     const googleProvider = new GoogleAuthProvider();
@@ -35,28 +59,7 @@ const Login = () => {
             .catch(error => console.error(error));
     };
 
-    // react hook form operation and sign in via Email
-    const onSubmit = (data, e) => {
 
-        const { email, password } = data;
-
-        emailLoginProvider(email, password)
-            .then(result => {
-                const user = result.user;
-                e.target.reset();
-                setError('');
-                navigate(from, { replace: true });
-                toast.success('Login Successful');
-            })
-            .catch(error => {
-                console.error(error)
-                setError(error.message);
-            })
-            .finally(() => {
-                setLoading(false);
-
-            })
-    }
 
     return (
         <div className="h-screen bg-[url('https://i.ibb.co/tCCx6Wp/Login-Cover-2.jpg')] bg-cover flex justify-center items-center">
@@ -66,13 +69,14 @@ const Login = () => {
                     <div className="form-control">
                         <label className='label'>Your Email</label>
                         <input type="email" className="input input-bordered" {...register("email", { required: "Email address is Compulsory", })} />
-                        {errors.email && <p className=' text-lime-400 font-bold'> {errors.email.message} </p> }
+                        {errors.email && <p className=' text-lime-400 font-bold'> {errors.email.message} </p>}
                     </div>
                     <div className="form-control">
                         <label className='label'> Your Password </label>
-                        <input type="password" className="input input-bordered text-black" {...register("password", { required: "Password is Compulsory", minLength: {value:8, message: "Password must be 8 charecters or longer"} })} />
-                        {errors.password && <p className=' text-lime-400 font-bold'> {errors.password.message} </p> }
+                        <input type="password" className="input input-bordered text-black" {...register("password", { required: "Password is Compulsory", minLength: { value: 8, message: "Password must be 8 charecters or longer" } })} />
+                        {errors.password && <p className=' text-lime-400 font-bold'> {errors.password.message} </p>}
                     </div>
+                    {loginError && <p className=' text-lime-400 font-bold'> {loginError} </p>}
                     <button type="submit" className='btn btn-primary w-full my-7'>Log In</button>
                 </form>
                 <div className='px-1'>

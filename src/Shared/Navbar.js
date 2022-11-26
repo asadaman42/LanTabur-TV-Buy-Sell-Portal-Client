@@ -1,12 +1,15 @@
 import React, { useContext } from 'react';
-import { Link, Navigate } from 'react-router-dom';
+import { Link, useNavigate,  } from 'react-router-dom';
 import { UniversalContext } from '../ContexSupplier/ContexSupplier';
 
 const Navbar = () => {
     const { user, logOut } = useContext(UniversalContext);
+    const navigate = useNavigate();
 
     const signOut = () => {
-        <Navigate to='/'></Navigate>
+        navigate("/dashboard");
+
+        // <Navigate to='/dashboard'></Navigate>
         logOut()
             .then(() => { })
             .catch(error => console.error(error));
@@ -15,11 +18,11 @@ const Navbar = () => {
     const menuItems = <React.Fragment>
         <li><Link to='/'>Home</Link></li>
         {
-            user ?
+            user?.uid ?
                 <>
                     <li><Link to='/dashboard'>Dashboard</Link></li>
                     <button onClick={signOut} className='btn btn-primary m-1'>Log Out</button>
-                    
+
                 </>
                 :
                 <li className='btn btn-primary m-1 rounded-2xl'> <Link to='/login'>Log In</Link> </li>

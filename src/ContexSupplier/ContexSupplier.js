@@ -33,12 +33,12 @@ const ContexSupplier = ({ children }) => {
     };
 
     const updatePhotoAndName = photoAndName => {
-        updateProfile(auth.currentUser, photoAndName);
+        return updateProfile(auth.currentUser, photoAndName);
     };
 
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (presentStudent) => {            
-            setUser(presentStudent);
+        const unsubscribe = onAuthStateChanged(auth, presentUser => {            
+            setUser(presentUser);
             setLoading(false);
         });
         return () => {
@@ -49,14 +49,16 @@ const ContexSupplier = ({ children }) => {
 
     const contextInformation = {
         createUserByEmailAndPassword,
-        user,        
+        emailLoginProvider,
+        user,
+        updatePhotoAndName,
+
+
         googleLogInProvider,
         logOut,
-        
-        emailLoginProvider,
         loading,
         setLoading,
-        updatePhotoAndName,        
+                
         setUser
     };
 
