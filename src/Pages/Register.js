@@ -7,7 +7,6 @@ import { UniversalContext } from '../ContexSupplier/ContexSupplier';
 const Register = () => {
     const navigate = useNavigate();
 
-
     // Import Context
     const { createUserByEmailAndPassword, updatePhotoAndName } = useContext(UniversalContext);
 
@@ -22,35 +21,22 @@ const Register = () => {
 
     // react hook form operation and sign up through Email
     const onSubmit = (data, e) => {
-
-        const { name, email, PhotoURL, password } = data;
-        
+        const { name, email, PhotoURL, password, userOrSeller } = data;
         setRegistrationError('');
-
         createUserByEmailAndPassword(email, password)
             .then(result => {
-
                 toast.success('Successfully Registered');
 
                 // for updating photo and name to firebase
-                updatePhotoAndName({ displayName: name, PhotoURL: PhotoURL }).then().catch(er => console.log(er));
+                updatePhotoAndName({ displayName: name, PhotoURL: PhotoURL })
+                    .then(navigate("/"))
+                    .catch(er => console.log(er));
 
                 e.target.reset();
-                
-
-                // handleUpdatePhotoAndName(name, PhotoURL);
-
-                navigate("/login");
-
-
             })
             .catch(error => setRegistrationError(error.message))
     };
 
-    // // for updating photo and name to firebase
-    // const handleUpdatePhotoAndName = (name, PhotoURL) => {
-    //     updatePhotoAndName({ displayName: name, PhotoURL: PhotoURL });
-    // };
 
     // for accepting privacy policy
     const checkedIt = (event) => {
@@ -61,7 +47,7 @@ const Register = () => {
         <div className="min-h-screen bg-[url('https://i.ibb.co/tCCx6Wp/Login-Cover-2.jpg')] bg-cover flex justify-center items-center">
             <div className='md:w-96 my-4 text-white'>
                 <h2 className='text-center text-3xl'> Create your account</h2>
-                <form onSubmit={handleSubmit(onSubmit)} className="my-4 px-1" >
+                <form onSubmit={handleSubmit(onSubmit)} className="my-4 px-2" >
                     <div className="form-control ">
                         <label className='label'>Your Name</label>
                         <input type="text" className="input input-bordered text-black" {...register("name", { required: "You must have a name, don't you?" })} />
@@ -91,8 +77,20 @@ const Register = () => {
                         <p>Use minimum one uppercase, one lowercase, one number & one special charecter.</p>
                         {errors.password && <p className=' text-lime-400 font-bold'>{errors.password.message}</p>}
                     </div>
+                    <div className='form-control'>
+                        <select className="select select-bordered w-full text-black" defaultValue='User' {...register("userOrSeller")} >
+                            <option> User </option>
+                            <option>Seller</option>
+                        </select>
+                    </div>
                     {registrationError && <p className=' text-lime-400 font-bold'> {registrationError} </p>}
-                    <button type="submit" className='btn btn-primary w-full my-7' value="Sign up">Sign up</button>
+
+                    <div className='flex items-center mt-2'>
+                        <input onChange={checkedIt} type="checkbox" className="checkbox checkbox-success" />
+                        <label className='label'> I accept mentioned <span className='text-blue-400 underline ml-2' > terms and conditions.</span> </label>
+                    </div>
+
+                    <button disabled={!checked} type="submit" className='btn btn-primary w-full my-7 disabled:text-white disabled:glass' value="Sign up">Sign up</button>
                     <p>Already have an account? Please <Link to='/login' className='underline text-blue-300 hover:text-xl hover:font-bold '>Log In</Link></p>
                 </form>
 

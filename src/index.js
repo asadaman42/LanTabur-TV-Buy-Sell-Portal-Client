@@ -4,13 +4,24 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import ContexSupplier from './ContexSupplier/ContexSupplier';
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
+
+const queryClient = new QueryClient();
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <ContexSupplier>
-    <App />
-    </ContexSupplier>
+    <QueryClientProvider client={queryClient}>
+      <ContexSupplier>
+        <App />
+      </ContexSupplier>
+    </QueryClientProvider>
   </React.StrictMode>
 );
 
