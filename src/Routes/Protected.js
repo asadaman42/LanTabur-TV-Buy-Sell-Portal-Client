@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 import { UniversalContext } from '../ContexSupplier/ContexSupplier';
 
-import { Rings } from 'react-loader-spinner'
+import { RotatingLines } from 'react-loader-spinner'
 
 
 const Protected = ({ children }) => {
@@ -12,23 +12,18 @@ const Protected = ({ children }) => {
 
     if (loading) {
         return (
-            <div className='flex justify-center items-center'>
-                <div className='text-center my-5'>
-                    <Rings
-                        height="80"
-                        width="80"
-                        color="#4fa94d"
-                        radius="8"
-                        wrapperStyle={{}}
-                        wrapperClass=""
+            <div className=' min-h-screen flex justify-center items-center'>
+                <div>
+                    <RotatingLines
+                        strokeColor="lime"
+                        strokeWidth="3"
+                        animationDuration="0.25"
+                        width="400"
                         visible={true}
-                        ariaLabel="rings-loading"
                     />
                 </div>
             </div>
         )
-
-
     }
 
     if (user) {
