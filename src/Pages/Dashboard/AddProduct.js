@@ -1,3 +1,5 @@
+
+import axios from 'axios';
 import { format } from 'date-fns';
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
@@ -8,25 +10,44 @@ const AddProduct = () => {
     const { user } = useContext(UniversalContext);
     const { register, handleSubmit, formState: { errors } } = useForm();
     const date = format(new Date(), 'PPPP');
+    const imgbbKey = process.env.REACT_APP_imgbb;
+
 
     const addProduct = (data, e) => {
-        data.postingTime = date;
-        data.sellerName = user?.displayName; 
-        console.log(data);
-        fetch(`http://localhost:5000/category/${data.company}`, {
-            method: "POST",
-            headers: {
-                "content-type": "application/json"
-            },
-            body: JSON.stringify(data)
-        })
-            .then(res => res.json())
-            .then(() => {
-                e.target.reset();
-                toast.success('Product Added');
-                // to do: want to add more product? proceed or navigate to homepage. 
-            })
-            .catch(err => console.error(err));
+        const image = data.img[0];
+        const formData = new FormData();
+        formData.append('image', image);
+        const url = `https://api.imgbb.com/1/upload?key=${imgbbKey}`;
+        axios.post(url, formData)
+            .then(imgData => {
+                if (imgData.data.success) {
+                    data.picture = imgData.data.data.display_url;
+                    data.postingTime = date;
+                    data.sellerName = user?.displayName;
+                    console.log(data);
+                    fetch(`http://localhost:5000/category/${data.company}`, {
+                        method: "POST",
+                        headers: {
+                            "content-type": "application/json"
+                        },
+                        body: JSON.stringify(data)
+                    })
+                        .then(res => res.json())
+                        .then(() => {
+                            e.target.reset();
+                            toast.success('Product Added');
+                            // to do: want to add more product? proceed or navigate to homepage. 
+                        })
+                        .catch(err => console.error(err));
+
+                }
+
+            });
+
+
+
+
+
     }
 
     return (
@@ -82,7 +103,7 @@ const AddProduct = () => {
                 </select>
                 {errors.location && <p className=' text-red-600'>{errors.location.message}</p>}
 
-                <input type="file" className="file-input file-input-bordered file-input-primary w-full max-w-xs" />
+                <input type="file" className="file-input file-input-bordered file-input-primary w-full max-w-xs" {...register("img", { required: "Please upload product photo" })} />
 
                 <button type="submit" className='btn btn-primary w-full my-7' >Add the Product</button>
 
