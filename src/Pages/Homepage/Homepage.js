@@ -1,16 +1,18 @@
-import { useQuery } from '@tanstack/react-query';
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+// import { useQuery } from '@tanstack/react-query';
+import React from 'react';
+import { Link, useLoaderData } from 'react-router-dom';
+import HomePageCategory from './HomePageCategory';
 
 const Homepage = () => {
-    const {data: categories = []} = useQuery({
-        queryKey: ['categories'],
-        queryFn: async() => {
-            const res = await fetch("http://localhost:5000/categories");
-            const data = res.json();
-            return data;
-        }
-    })
+    const categories = useLoaderData();
+    // const {data: categories = []} = useQuery({
+    //     queryKey: ['categories'],
+    //     queryFn: async() => {
+    //         const res = await fetch("http://localhost:5000/categories");
+    //         const data = res.json();
+    //         return data;
+    //     }
+    // })
 
     /* const {data: categories = [] } = useQuery(
         {
@@ -38,19 +40,7 @@ const Homepage = () => {
             </section>
 
             <section>
-                <h4>Second Hand TV  Categoires</h4>
-
-
-                <ul className='ml-5'>
-                    {
-                        categories.map(
-                            category =>
-                                <li key={category._id}>
-                                    <Link to={`/category/${category._id}`}> {category.categoryName} </Link>
-                                </li>)
-                    }
-
-                </ul>
+                <HomePageCategory></HomePageCategory>               
             </section>
 
             <section>

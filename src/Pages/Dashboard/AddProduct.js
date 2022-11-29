@@ -1,6 +1,7 @@
 import { format } from 'date-fns';
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import { UniversalContext } from '../../ContexSupplier/ContexSupplier';
 
 const AddProduct = () => {
@@ -9,7 +10,23 @@ const AddProduct = () => {
     const date = format(new Date(), 'PPPP');
 
     const addProduct = (data, e) => {
+        data.postingTime = date;
+        data.sellerName = user?.displayName; 
         console.log(data);
+        fetch(`http://localhost:5000/category/${data.company}`, {
+            method: "POST",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(data)
+        })
+            .then(res => res.json())
+            .then(() => {
+                e.target.reset();
+                toast.success('Product Added');
+                // to do: want to add more product? proceed or navigate to homepage. 
+            })
+            .catch(err => console.error(err));
     }
 
     return (
@@ -56,6 +73,16 @@ const AddProduct = () => {
                     <option>Sylhet</option>
                 </select>
                 {errors.location && <p className=' text-red-600'>{errors.location.message}</p>}
+
+                <select className="select select-bordered w-full my-1" {...register("company", { required: "Please select TV Company" })} >
+                    <option value="" className='hidden'>Select TV Company</option>
+                    <option>Vision</option>
+                    <option>Walton</option>
+                    <option>Toshiba</option>
+                </select>
+                {errors.location && <p className=' text-red-600'>{errors.location.message}</p>}
+
+                <input type="file" className="file-input file-input-bordered file-input-primary w-full max-w-xs" />
 
                 <button type="submit" className='btn btn-primary w-full my-7' >Add the Product</button>
 

@@ -1,12 +1,14 @@
 import React from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import Footer from '../../Shared/Footer';
+import Navbar from '../../Shared/Navbar';
+import { Outlet } from 'react-router-dom';
 
 const Dashboard = () => {
     return (
         <div>
-            Dashboard
-            <Link to='/dashboard/addproduct'> Add a Proudct </Link>
+            <Navbar></Navbar>
             <Outlet></Outlet>
+            <Footer></Footer>                       
         </div>
     );
 };

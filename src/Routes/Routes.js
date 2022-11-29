@@ -3,6 +3,7 @@ import Main from "../Layout/Main";
 import Category from "../Pages/Category";
 import AddProduct from "../Pages/Dashboard/AddProduct";
 import Dashboard from "../Pages/Dashboard/Dashboard";
+import DashboardHomepage from "../Pages/Dashboard/DashboardHomepage";
 import Homepage from "../Pages/Homepage/Homepage";
 import Login from "../Pages/Login";
 import Register from "../Pages/Register";
@@ -17,7 +18,7 @@ export const router = createBrowserRouter([
         children: [
             {
                 path: '/',
-                element: <Homepage></Homepage>
+                element: <Homepage></Homepage>                
             },
             {
                 path: '/login',
@@ -41,13 +42,13 @@ export const router = createBrowserRouter([
         children: [
             {
                 path: '/dashboard',
-                element: <Dashboard></Dashboard>
+                element: <DashboardHomepage></DashboardHomepage>
             },
             {
                 path: '/dashboard/addproduct',
                 element: <AddProduct></AddProduct>
             },
-            
+
         ]
     }
 ]);

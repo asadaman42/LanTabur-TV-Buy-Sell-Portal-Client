@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { json, useLoaderData } from 'react-router-dom';
+import { useLoaderData } from 'react-router-dom';
 import { GoVerified } from "react-icons/go";
 import { UniversalContext } from '../ContexSupplier/ContexSupplier';
 import { format } from 'date-fns';
@@ -11,29 +11,28 @@ const Category = () => {
     const { register, handleSubmit } = useForm();
     const { user } = useContext(UniversalContext);
     const category = useLoaderData();
-    const {_id, categoryName, products } = category;
+    const { _id, categoryName, products } = category;
     const [modalInfo, setModalInfo] = useState(null);
-    console.log(modalInfo);
     // const { name, reesalePrice } = modalInfo;
-    const date = format(new Date(), 'PPPP') ;
+    const date = format(new Date(), 'PPPP');
 
 
     const onSubmit = (data, e) => {
         data.bookingCatagory = categoryName;
         data.bookingCategoryID = _id;
-        fetch("http://localhost:5000/bookings",{
-            method: "POST", 
+        fetch("http://localhost:5000/bookings", {
+            method: "POST",
             headers: {
                 "content-type": "application/json"
             },
             body: JSON.stringify(data)
         })
-        .then(res => res.json())
-        .then(() => {
-            setModalInfo(null);
-            toast.success('Booking OCnfirmed');
-        })
-        .catch(err => console.error(err));                       
+            .then(res => res.json())
+            .then(() => {
+                setModalInfo(null);
+                toast.success('Booking OCnfirmed');
+            })
+            .catch(err => console.error(err)); 
     };
 
 
@@ -44,7 +43,7 @@ const Category = () => {
         <div className='mx-7'>
             <h2> {categoryName} </h2>
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
-                {products.map(product => {
+                {products?.map(product => {
                     const { OriginalPrice, isVerified, location, name, picture, postingTime, reesalePrice, sellerName, yearsOfUse } = product;
                     return (<div className="card card-compact  shadow-xl">
                         <figure><img src={picture} alt="Shoes" /></figure>
