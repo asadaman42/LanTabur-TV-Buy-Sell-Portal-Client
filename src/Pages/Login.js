@@ -30,13 +30,13 @@ const Login = () => {
 
         emailLoginProvider(email, password)
             .then(result => {
+                e.target.reset();
+                toast.success('Login Successful');
                 navigate(from, { replace: true });
-                // e.target.reset();
-                // toast.success('Login Successful');
             })
             .catch(error => setLoginError(error.message))
             .finally(() => {
-                // setLoading(false);
+                setLoading(false);
             })
     }
 

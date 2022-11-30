@@ -79,7 +79,7 @@ const Register = () => {
                     </div>
                     <div className='form-control'>
                         <select className="select select-bordered w-full text-black" defaultValue='User' {...register("userOrSeller")} >
-                            <option> User </option>
+                            <option>User</option>
                             <option>Seller</option>
                         </select>
                     </div>

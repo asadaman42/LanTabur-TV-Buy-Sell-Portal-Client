@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const DashboardHomepage = () => {
     return (
-        <div>
+        <div className=' bg-red-400'>
             This is dashboard Homepage.
             <Link to='/dashboard/addproduct'> Add a Proudct </Link>
         </div>

@@ -4,6 +4,7 @@ import { format } from 'date-fns';
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 import { UniversalContext } from '../../ContexSupplier/ContexSupplier';
 
 const AddProduct = () => {
@@ -11,6 +12,7 @@ const AddProduct = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const date = format(new Date(), 'PPPP');
     const imgbbKey = process.env.REACT_APP_imgbb;
+    const navigate = useNavigate();
 
 
     const addProduct = (data, e) => {
@@ -36,6 +38,8 @@ const AddProduct = () => {
                         .then(() => {
                             e.target.reset();
                             toast.success('Product Added');
+                            navigate('/dashboard/myproducts');
+
                             // to do: want to add more product? proceed or navigate to homepage. 
                         })
                         .catch(err => console.error(err));

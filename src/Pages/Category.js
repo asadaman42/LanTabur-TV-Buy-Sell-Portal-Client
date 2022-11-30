@@ -32,7 +32,7 @@ const Category = () => {
                 setModalInfo(null);
                 toast.success('Booking OCnfirmed');
             })
-            .catch(err => console.error(err)); 
+            .catch(err => console.error(err));
     };
 
 
@@ -44,15 +44,16 @@ const Category = () => {
             <h2> {categoryName} </h2>
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
                 {products?.map(product => {
-                    const { OriginalPrice, isVerified, location, name, picture, postingTime, reesalePrice, sellerName, yearsOfUse } = product;
+                    const { productName, isVerified, picture, originalPrice, resalePrice, yearsOfUse,  location,  postingTime, sellerName,  } = product;
+                    // const {phoneNumber, description, yearOfPurchase, productCondition, company, _id} = product;
                     return (<div className="card card-compact  shadow-xl">
                         <figure><img src={picture} alt="Shoes" /></figure>
                         <div className="card-body">
-                            <h2 className="card-title">{name}</h2>
-                            <p>OriginalPrice: {OriginalPrice}</p>
+                            <h2 className="card-title">{productName}</h2>
+                            <p>OriginalPrice: {originalPrice}</p>
                             <p>location: {location} </p>
                             <p>postingTime: {postingTime} </p>
-                            <p>reesalePrice: {reesalePrice} </p>
+                            <p>reesalePrice: {resalePrice} </p>
                             <p>yearsOfUse: {yearsOfUse} </p>
                             {isVerified ?
                                 <p>sellerName:{sellerName}<GoVerified className='text-blue-600 inline-flex ml-1' /> </p>
@@ -74,14 +75,15 @@ const Category = () => {
                     <div className="modal">
                         <div className="modal-box relative">
                             <label htmlFor="booking-modal" className="btn btn-sm btn-circle absolute right-2 top-2">✕</label>
-                            <h3 className="text-lg font-bold"> {modalInfo.name} </h3>
+                            <h3 className="text-lg font-bold"> {modalInfo.productName} </h3>
                             <form onSubmit={handleSubmit(onSubmit)} className='mx-auto my-10'>
-                                <input {...register('buyerEmail')} type="email" readOnly defaultValue={user?.email} className="input w-full input-bordered my-2" />
-                                <input {...register('bookingDate')} type="text" readOnly defaultValue={date} className="input w-full input-bordered  my-2" />
                                 <input {...register('buyerName')} type="text" readOnly defaultValue={user?.displayName} className="input w-full input-bordered my-2" />
-                                <input {...register('resalePrice')} type="text" readOnly defaultValue={modalInfo.reesalePrice} className="input w-full input-bordered my-2" />
-                                <input {...register('phoneNumber')} type="text" placeholder="Phone Number" className="input w-full input-bordered my-2" />
-                                <input {...register('location')} type="text" placeholder="Location" className="input w-full input-bordered my-2" />
+                                <input {...register('buyerEmail')} type="email" readOnly defaultValue={user?.email} className="input w-full input-bordered my-2" />
+                                <input {...register('itemName')} type="text" readOnly defaultValue={modalInfo.productName} className="input w-full input-bordered  my-2" />
+                                <input {...register('bookingDate')} type="text" readOnly defaultValue={date} className="input w-full input-bordered  my-2" />
+                                <input {...register('resalePrice')} type="text" readOnly defaultValue={modalInfo.resalePrice} className="input w-full input-bordered my-2" />
+                                <input {...register('phoneNumber')} type="text" placeholder="Buyer's Phone Number" className="input w-full input-bordered my-2" />
+                                <input {...register('location')} type="text" placeholder="Buyer's Location" className="input w-full input-bordered my-2" />
                                 <button className='w-full btn btn-accent text-white' type="submit"> Submit </button>
                             </form>
                         </div>
