@@ -38,7 +38,7 @@ const Register = () => {
                     const { email, password, name, userImg } = data;
 
                     // posting Data to DB
-                    fetch('http://localhost:5000/users', {
+                    fetch('https://lantabur-tv-buy-sell-portal-server.vercel.app/users', {
                         method: "POST",
                         headers: {
                             "content-type": "application/json"

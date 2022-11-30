@@ -8,7 +8,7 @@ const HomePageCategory = () => {
     const { data: categories, isLoading } = useQuery({
         queryKey: ['categories'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/categories');
+            const res = await fetch('https://lantabur-tv-buy-sell-portal-server.vercel.app/categories');
             const data = res.json();
             return data;
         }

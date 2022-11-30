@@ -6,7 +6,7 @@ import { UniversalContext } from '../../ContexSupplier/ContexSupplier';
 
 const MyOrders = () => {
     const { user } = useContext(UniversalContext);
-    const myOrdersUrl = `http://localhost:5000/bookings?email=${user.email}`;
+    const myOrdersUrl = `https://lantabur-tv-buy-sell-portal-server.vercel.app/bookings?email=${user.email}`;
     const { data: myOrders, isLoading, refetch } = useQuery({
         queryKey: ['bookings', user?.email],
         queryFn: async () => {

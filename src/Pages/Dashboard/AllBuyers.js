@@ -5,7 +5,7 @@ import { Circles } from 'react-loader-spinner';
 import { Link } from 'react-router-dom';
 
 const AllBuyers = () => {
-    const allBuyersUrl = 'http://localhost:5000/users?userType=Buyer'
+    const allBuyersUrl = 'https://lantabur-tv-buy-sell-portal-server.vercel.app/users?userType=Buyer'
     const { data: allBuyers, isLoading, refetch } = useQuery({
         queryKey: ['Buyer'],
         queryFn: async () => {
@@ -38,7 +38,7 @@ const AllBuyers = () => {
     const deleteUser = (userID) => {
         const response = window.confirm("Sure???");
         if (response) {
-            fetch(`http://localhost:5000/user/delete/${userID}`, {
+            fetch(`https://lantabur-tv-buy-sell-portal-server.vercel.app/user/delete/${userID}`, {
                 method: "delete"
             })
                 .then(res => res.json())

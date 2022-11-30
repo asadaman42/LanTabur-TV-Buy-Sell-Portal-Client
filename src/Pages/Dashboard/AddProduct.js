@@ -26,7 +26,7 @@ const AddProduct = () => {
                     data.picture = imgData.data.data.display_url;
                     data.postingTime = date;
                     data.sellerName = user?.displayName;                    
-                    fetch(`http://localhost:5000/category/${data.company}`, {
+                    fetch(`https://lantabur-tv-buy-sell-portal-server.vercel.app/category/${data.company}`, {
                         method: "POST",
                         headers: {
                             "content-type": "application/json"

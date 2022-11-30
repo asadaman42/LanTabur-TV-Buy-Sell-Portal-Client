@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../Layout/Main";
+import Blog from "../Pages/Blog";
 import Category from "../Pages/Category";
 import AddProduct from "../Pages/Dashboard/AddProduct";
 import AllBuyers from "../Pages/Dashboard/AllBuyers";
@@ -12,6 +13,7 @@ import ReportedItems from "../Pages/Dashboard/ReportedItems";
 import Homepage from "../Pages/Homepage/Homepage";
 import Login from "../Pages/Login";
 import Register from "../Pages/Register";
+import Unhandled from "../Pages/Unhandled";
 import AdminRoute from "./AdminRoute";
 import Protected from "./Protected";
 
@@ -36,9 +38,17 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/category/:categoryId',
-                loader: ({ params }) => fetch(`http://localhost:5000/category/${params.categoryId}`),
+                loader: ({ params }) => fetch(`https://lantabur-tv-buy-sell-portal-server.vercel.app/category/${params.categoryId}`),
                 element: <Protected><Category></Category></Protected>
             },
+            {
+                path: '/blog',
+                element: <Blog></Blog> 
+            },
+            {
+                path: '/*',
+                element: <Unhandled></Unhandled>
+            }
         ]
     },
 
@@ -74,6 +84,10 @@ export const router = createBrowserRouter([
                 path: '/dashboard/myproducts',
                 element: <MyProducts></MyProducts>
             },
+            {
+                path: '/dashboard/*',
+                element: <Unhandled></Unhandled>
+            }
 
         ]
     }

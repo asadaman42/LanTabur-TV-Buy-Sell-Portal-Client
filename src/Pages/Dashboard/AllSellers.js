@@ -7,7 +7,7 @@ const AllSellers = () => {
 
 
 
-    const allSellersUrl = 'http://localhost:5000/users?userType=Seller'
+    const allSellersUrl = 'https://lantabur-tv-buy-sell-portal-server.vercel.app/users?userType=Seller'
     const { data: allSellers, isLoading, refetch } = useQuery({
         queryKey: ['sellers'],
         queryFn: async () => {
@@ -40,7 +40,7 @@ const AllSellers = () => {
 
 
     const makeAdmin = (userID) => {
-        fetch(`http://localhost:5000/user/admin/${userID}`, {
+        fetch(`https://lantabur-tv-buy-sell-portal-server.vercel.app/user/admin/${userID}`, {
             method: "PUT",
         })
             .then(res => res.json())
@@ -57,7 +57,7 @@ const AllSellers = () => {
 
 
     const verify = (userID) => {
-        fetch(`http://localhost:5000/user/verification/${userID}`, {
+        fetch(`https://lantabur-tv-buy-sell-portal-server.vercel.app/user/verification/${userID}`, {
             method: "PUT",
         })
             .then(res => res.json())
@@ -74,7 +74,7 @@ const AllSellers = () => {
     const deleteUser = (userID) => {
         const response = window.confirm("Sure???");
         if (response) {
-            fetch(`http://localhost:5000/user/delete/${userID}`, {
+            fetch(`https://lantabur-tv-buy-sell-portal-server.vercel.app/user/delete/${userID}`, {
                 method: "delete"
             })
                 .then(res => res.json())

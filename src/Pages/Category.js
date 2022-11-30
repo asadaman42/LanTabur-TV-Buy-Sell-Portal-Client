@@ -20,7 +20,7 @@ const Category = () => {
     const onSubmit = (data, e) => {
         data.bookingCatagory = categoryName;
         data.bookingCategoryID = _id;
-        fetch("http://localhost:5000/bookings", {
+        fetch("https://lantabur-tv-buy-sell-portal-server.vercel.app/bookings", {
             method: "POST",
             headers: {
                 "content-type": "application/json"
