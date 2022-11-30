@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
@@ -19,23 +20,60 @@ const Register = () => {
     // React Hook Form
     const { register, handleSubmit, formState: { errors } } = useForm();
 
+    // imgbb Key
+    const imgbbKey = process.env.REACT_APP_imgbb;
+
     // react hook form operation and sign up through Email
     const onSubmit = (data, e) => {
-        const { name, email, PhotoURL, password, userOrSeller } = data;
-        setRegistrationError('');
-        createUserByEmailAndPassword(email, password)
-            .then(result => {
-                toast.success('Successfully Registered');
+        const image = data.userImg[0];
+        const formData = new FormData();
+        formData.append('image', image);
+        const url = `https://api.imgbb.com/1/upload?key=${imgbbKey}`;
 
-                // for updating photo and name to firebase
-                updatePhotoAndName({ displayName: name, PhotoURL: PhotoURL })
-                    .then(navigate("/"))
-                    .catch(er => console.log(er));
+        // Getting User Picture link
+        axios.post(url, formData)
+            .then(imgData => {
+                if (imgData.data.success) {
+                    data.userImg = imgData.data.data.display_url;
+                    const { email, password, name, userImg } = data;
 
-                e.target.reset();
+                    // posting Data to DB
+                    fetch('http://localhost:5000/users', {
+                        method: "POST",
+                        headers: {
+                            "content-type": "application/json"
+                        },
+                        body: JSON.stringify(data)
+                    })
+                        .then(res => res.json())
+                        .then(() => {                            
+                            setRegistrationError('');
+                            createUserByEmailAndPassword(email, password)
+                                .then(result => {
+                                    toast.success('Successfully Registered');
+
+                                    // for updating photo and name to firebase
+                                    updatePhotoAndName({ displayName: name, PhotoURL: userImg})
+                                        .then(() => {
+                                            e.target.reset();
+                                            navigate("/")
+                                        })
+                                        .catch(er => console.log(er));
+
+                                    
+                                })
+                                .catch(error => setRegistrationError(error.message))
+                        })
+                        .catch(err => console.error(err));
+
+                }
             })
-            .catch(error => setRegistrationError(error.message))
+
+
+
     };
+
+
 
 
     // for accepting privacy policy
@@ -78,12 +116,15 @@ const Register = () => {
                         {errors.password && <p className=' text-lime-400 font-bold'>{errors.password.message}</p>}
                     </div>
                     <div className='form-control'>
-                        <select className="select select-bordered w-full text-black" defaultValue='User' {...register("userOrSeller")} >
-                            <option>User</option>
+                        <select className="select select-bordered w-full text-black" defaultValue='User' {...register("buyerOrSeller")} >
+                            <option>Buyer</option>
                             <option>Seller</option>
                         </select>
                     </div>
                     {registrationError && <p className=' text-lime-400 font-bold'> {registrationError} </p>}
+
+                    <input type="file" className="text-black file-input file-input-bordered file-input-primary w-full max-w-xs my-4" {...register("userImg", { required: "Please upload Your Picture" })} />
+                    {errors.userImg && <p className=' text-lime-400 font-bold'>{errors.userImg.message}</p>}
 
                     <div className='flex items-center mt-2'>
                         <input onChange={checkedIt} type="checkbox" className="checkbox checkbox-success" />

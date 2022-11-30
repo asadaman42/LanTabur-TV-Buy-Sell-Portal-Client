@@ -8,9 +8,11 @@ import Dashboard from "../Pages/Dashboard/Dashboard";
 import DashboardHomepage from "../Pages/Dashboard/DashboardHomepage";
 import MyOrders from "../Pages/Dashboard/MyOrders";
 import MyProducts from "../Pages/Dashboard/MyProducts";
+import ReportedItems from "../Pages/Dashboard/ReportedItems";
 import Homepage from "../Pages/Homepage/Homepage";
 import Login from "../Pages/Login";
 import Register from "../Pages/Register";
+import AdminRoute from "./AdminRoute";
 import Protected from "./Protected";
 
 
@@ -50,11 +52,19 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/dashboard/allsellers',
-                element: <AllSellers></AllSellers>
+                element: <AdminRoute><AllSellers></AllSellers></AdminRoute>
             },
             {
                 path: '/dashboard/allbuyers',
-                element: <AllBuyers></AllBuyers>
+                element: <AdminRoute><AllBuyers></AllBuyers></AdminRoute>
+            },
+            {
+                path: '/dashboard/reporteditems',
+                element: <AdminRoute><ReportedItems></ReportedItems></AdminRoute>
+            },
+            {
+                path: '/dashboard/myorders',
+                element: <MyOrders></MyOrders>
             },
             {
                 path: '/dashboard/addproduct',
@@ -63,10 +73,6 @@ export const router = createBrowserRouter([
             {
                 path: '/dashboard/myproducts',
                 element: <MyProducts></MyProducts>
-            },
-            {
-                path: '/dashboard/myorders',
-                element: <MyOrders></MyOrders>
             },
 
         ]

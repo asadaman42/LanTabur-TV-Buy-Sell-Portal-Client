@@ -84,6 +84,7 @@ const Category = () => {
                                 <input {...register('resalePrice')} type="text" readOnly defaultValue={modalInfo.resalePrice} className="input w-full input-bordered my-2" />
                                 <input {...register('phoneNumber')} type="text" placeholder="Buyer's Phone Number" className="input w-full input-bordered my-2" />
                                 <input {...register('location')} type="text" placeholder="Buyer's Location" className="input w-full input-bordered my-2" />
+                                <img className='hidden' src={modalInfo.picture} alt="" {...register('bookingPicture')} />
                                 <button className='w-full btn btn-accent text-white' type="submit"> Submit </button>
                             </form>
                         </div>

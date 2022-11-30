@@ -25,8 +25,7 @@ const AddProduct = () => {
                 if (imgData.data.success) {
                     data.picture = imgData.data.data.display_url;
                     data.postingTime = date;
-                    data.sellerName = user?.displayName;
-                    console.log(data);
+                    data.sellerName = user?.displayName;                    
                     fetch(`http://localhost:5000/category/${data.company}`, {
                         method: "POST",
                         headers: {
@@ -43,17 +42,12 @@ const AddProduct = () => {
                             // to do: want to add more product? proceed or navigate to homepage. 
                         })
                         .catch(err => console.error(err));
-
                 }
-
             });
-
-
-
-
-
     }
 
+
+    
     return (
         <div className='flex justify-center items-center'>
             <form onSubmit={handleSubmit(addProduct)} className="flex flex-col md:w-96 justify-center items-center">
@@ -108,6 +102,7 @@ const AddProduct = () => {
                 {errors.location && <p className=' text-red-600'>{errors.location.message}</p>}
 
                 <input type="file" className="file-input file-input-bordered file-input-primary w-full max-w-xs" {...register("img", { required: "Please upload product photo" })} />
+                {errors.img && <p className=' text-red-600'>{errors.img.message}</p>}
 
                 <button type="submit" className='btn btn-primary w-full my-7' >Add the Product</button>
 

@@ -12,7 +12,10 @@ const Login = () => {
     const { emailLoginProvider, googleLogInProvider, setLoading } = useContext(UniversalContext);
 
     // for Error Handling
-    const [loginError, setLoginError] = useState('')
+    const [loginError, setLoginError] = useState('');
+
+    // for Login User Email 
+    // const [loggdInUserEmail, setLoggedInUserEmail] = useState('');
 
     // navigate user from where he came
     const location = useLocation();

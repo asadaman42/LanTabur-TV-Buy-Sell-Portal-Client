@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
     return (
-        <footer className="p-10 bg-[url('https://i.postimg.cc/3R8tZCYn/footer.png')] bg-center">
+        <footer className="p-10">
             <div className='footer'>
                 <div>
                     <span className="footer-title">Information</span>
