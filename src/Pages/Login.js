@@ -51,8 +51,35 @@ const Login = () => {
         googleLogInProvider(googleProvider)
             .then(result => {
                 const user = result.user;
-                console.log(user);
-                navigate(from, { replace: true })
+                const googleUser = {
+                    name: user.displayName,
+                    email: user.email,
+                    password: null,
+                    buyerOrSeller: "Buyer",
+                    userImg: user.photoURL
+                };
+
+
+                fetch('https://lantabur-tv-buy-sell-portal-server-asadaman42.vercel.app/users', {
+                    method: "POST",
+                    headers: {
+                        "content-type": "application/json"
+                    },
+                    body: JSON.stringify(googleUser)
+                })
+                    .then(res => res.json())
+                    .then(data => {                        
+                        if (data.upsertedId) {
+                            toast.success('Welcome First Time');
+                            navigate(from, { replace: true });
+                        }
+                        else {
+                            toast.success(`Welcome Back Mr. ${googleUser.name}`);
+                            navigate(from, { replace: true });
+                        }
+                    })
+                    .catch(err => console.error(err));
+
             })
             .catch(error => console.error(error));
     };

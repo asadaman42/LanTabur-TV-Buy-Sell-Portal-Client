@@ -5,6 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import ContexSupplier from './ContexSupplier/ContexSupplier';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import 'tw-elements';
 
 const queryClient = new QueryClient();
 

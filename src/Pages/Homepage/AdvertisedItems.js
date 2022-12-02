@@ -1,25 +1,19 @@
-import React, { useContext, useState } from 'react';
-import { useLoaderData } from 'react-router-dom';
-import { GoVerified } from "react-icons/go";
-import { UniversalContext } from '../ContexSupplier/ContexSupplier';
 import { format } from 'date-fns';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
+import { GoVerified } from 'react-icons/go';
+import { UniversalContext } from '../../ContexSupplier/ContexSupplier';
 
-
-const Category = () => {
-    const { register, handleSubmit } = useForm();
+const AdvertisedItems = ({ advertisedItems }) => {
     const { user } = useContext(UniversalContext);
-    const category = useLoaderData();
-    const { _id, categoryName, products } = category;
     const [modalInfo, setModalInfo] = useState(null);
-    // const { name, reesalePrice } = modalInfo;
     const date = format(new Date(), 'PPPP');
-
+    const { register, handleSubmit } = useForm();
+    
 
     const onSubmit = (data, e) => {
-        data.bookingCatagory = categoryName;
-        data.bookingCategoryID = _id;
+        
         fetch("https://lantabur-tv-buy-sell-portal-server-asadaman42.vercel.app/bookings", {
             method: "POST",
             headers: {
@@ -35,16 +29,13 @@ const Category = () => {
             .catch(err => console.error(err));
     };
 
-
-
-
     return (
+        <div>
+            <h2 className='text-center text-4xl'>Advertised Items</h2>
 
-        <div className='mx-7'>
-            <h2 className='text-center text-4xl my-4'> Products under <span className='font-bold'>{categoryName}</span> category </h2>
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
-                {products?.map(product => {
-                    const { productName, isVerified, picture, originalPrice, resalePrice, yearsOfUse,  location,  postingTime, sellerName,  } = product;
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5'>
+                {advertisedItems?.map(product => {
+                    const { productName, isVerified, picture, originalPrice, resalePrice, yearsOfUse, location, postingTime, sellerName, } = product;
                     // const {phoneNumber, description, yearOfPurchase, productCondition, company, _id} = product;
                     return (<div className="card card-compact  shadow-xl">
                         <figure><img src={picture} alt="Shoes" /></figure>
@@ -56,9 +47,9 @@ const Category = () => {
                             <p>Resale Price: {resalePrice} </p>
                             <p>Years of Use: {yearsOfUse} </p>
                             {isVerified ?
-                                <p>Seller Name: {sellerName}<GoVerified className='text-blue-600 inline-flex ml-1' /> </p>
+                                <p>sellerName: {sellerName}<GoVerified className='text-blue-600 inline-flex ml-1' /> </p>
                                 :
-                                <p>Seller Name: {sellerName} </p>}
+                                <p>sellerName: {sellerName} </p>}
                             {isVerified &&
                                 <div className="card-actions justify-center">
                                     <label onClick={() => setModalInfo(product)} htmlFor="booking-modal" className="btn btn-primary">Book Now</label>
@@ -68,7 +59,6 @@ const Category = () => {
                 }
                 )}
             </div>
-
             {modalInfo &&
                 <div>
                     <input type="checkbox" id="booking-modal" className="modal-toggle" />
@@ -82,6 +72,7 @@ const Category = () => {
                                 <input {...register('itemName')} type="text" readOnly defaultValue={modalInfo.productName} className="input w-full input-bordered  my-2" />
                                 <input {...register('bookingDate')} type="text" readOnly defaultValue={date} className="input w-full input-bordered  my-2" />
                                 <input {...register('resalePrice')} type="text" readOnly defaultValue={modalInfo.resalePrice} className="input w-full input-bordered my-2" />
+                                <input {...register('categoryName')} type="text" readOnly defaultValue={modalInfo.company} className="hidden input w-full input-bordered my-2" />
                                 <input {...register('phoneNumber')} type="text" placeholder="Buyer's Phone Number" className="input w-full input-bordered my-2" />
                                 <input {...register('location')} type="text" placeholder="Buyer's Location" className="input w-full input-bordered my-2" />
                                 <img className='hidden' src={modalInfo.picture} alt="" {...register('bookingPicture')} />
@@ -90,9 +81,8 @@ const Category = () => {
                         </div>
                     </div>
                 </div>}
-
         </div>
     );
 };
 
-export default Category;
+export default AdvertisedItems;

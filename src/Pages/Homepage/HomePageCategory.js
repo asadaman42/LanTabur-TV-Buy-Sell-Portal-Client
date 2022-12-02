@@ -3,12 +3,12 @@ import React from 'react';
 import { RotatingLines } from 'react-loader-spinner';
 import { Link } from 'react-router-dom';
 
-const HomePageCategory = () => { 
+const HomePageCategory = () => {
 
     const { data: categories, isLoading } = useQuery({
         queryKey: ['categories'],
         queryFn: async () => {
-            const res = await fetch('https://lantabur-tv-buy-sell-portal-server.vercel.app/categories');
+            const res = await fetch('https://lantabur-tv-buy-sell-portal-server-asadaman42.vercel.app/categories');
             const data = res.json();
             return data;
         }
@@ -29,20 +29,28 @@ const HomePageCategory = () => {
     }
 
     return (
-        <div>
-            <h4>Second Hand TV  Categoires</h4>
+        <div className='py-7'>
+            <h4 className=' text-center text-4xl font-bold'>Second Hand TV  Categoires</h4>
 
 
-            <ul className='ml-5'>
+            <div className='ml-5 grid grid-cols-1 md:grid-cols-3 gap-5 my-7'>
                 {categories &&
                     categories.map(
                         category =>
-                            <li key={category._id}>
-                                <Link to={`/category/${category._id}`}> {category.categoryName} </Link>
-                            </li>)
-                }
+                            <div key={category._id} className="card shadow-xl image-full">
+                                <figure><img src={category.categoryImg}  alt="" /></figure>
+                                <div className="card-body">
+                                    <h2 className="card-title"> {category.categoryName} TV </h2>
+                                    <p> All the <span className='font-bold text-white text-2xl'>{category.categoryName}</span> branded TVs are here. </p>
+                                    <div className="card-actions justify-center">
+                                        <Link to={`/category/${category._id}`}><button className="btn btn-primary">Explore {category.categoryName} </button></Link>
+                                    </div>
+                                </div>
+                            </div>
+                                             
+                    )}
 
-            </ul>
+            </div>
 
         </div>
     );

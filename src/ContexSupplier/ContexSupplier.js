@@ -3,6 +3,7 @@ import { createContext } from 'react';
 import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import app from '../FireBase/FireBase.config';
 import { useEffect } from 'react';
+import { RotatingLines } from 'react-loader-spinner';
 
 export const UniversalContext = createContext();
 const auth = getAuth(app);
@@ -11,6 +12,31 @@ const ContexSupplier = ({ children }) => {
 
     const [loading, setLoading] = useState(true);
     const [user, setUser] = useState(null); 
+
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, presentUser => {            
+            setUser(presentUser);
+            setLoading(false);
+        });
+        return () => {
+            unsubscribe();
+        };
+
+    }, []);
+
+    if (loading) {
+        return (
+            <div>
+                <RotatingLines
+                    strokeColor="grey"
+                    strokeWidth="5"
+                    animationDuration="0.75"
+                    width="96"
+                    visible={true}
+                />
+            </div>
+        )
+    }
 
     const googleLogInProvider = (provider) => {
         setLoading(true);
@@ -33,19 +59,11 @@ const ContexSupplier = ({ children }) => {
     };
 
     const updatePhotoAndName = photoAndName => {
+        console.log(photoAndName); 
         return updateProfile(auth.currentUser, photoAndName);
     };
 
-    useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, presentUser => {            
-            setUser(presentUser);
-            setLoading(false);
-        });
-        return () => {
-            unsubscribe();
-        };
-
-    }, []);
+    
 
     const contextInformation = {
         createUserByEmailAndPassword,

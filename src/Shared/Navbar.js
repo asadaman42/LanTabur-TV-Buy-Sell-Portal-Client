@@ -1,10 +1,39 @@
+import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
+import { Circles } from 'react-loader-spinner';
 import { Link, useNavigate, } from 'react-router-dom';
 import { UniversalContext } from '../ContexSupplier/ContexSupplier';
 
 const Navbar = () => {
     const { user, logOut } = useContext(UniversalContext);
     const navigate = useNavigate();
+    const userUrl = `https://lantabur-tv-buy-sell-portal-server-asadaman42.vercel.app/users/${user?.email}`
+    const { data: userFromDB, isLoading, refetch } = useQuery({
+        queryKey: ['email'],
+        queryFn: async () => {
+            const response = await fetch(userUrl);
+            const data = await response.json();
+            return data;
+        }
+    });
+
+    if (isLoading) {
+        return (
+            <div className=' min-h-screen flex justify-center items-center'>
+                <div>
+                    <Circles
+                        height="80"
+                        width="80"
+                        color="#4fa94d"
+                        ariaLabel="circles-loading"
+                        wrapperStyle={{}}
+                        wrapperClass=""
+                        visible={true}
+                    />
+                </div>
+            </div>
+        )
+    }
 
     const signOut = () => {
         // <Navigate to='/dashboard'></Navigate>
@@ -19,6 +48,8 @@ const Navbar = () => {
             user?.uid ?
                 <>
                     <li><Link to='/dashboard'>Dashboard</Link></li>
+                    <h2 className='inline-flex items-center' > Mr. {userFromDB?.name} </h2>
+                    <img className="mask mask-circle rounded w-12" src={userFromDB?.userImg} alt='' />
                     <button onClick={signOut} className='btn btn-primary m-1'>Log Out</button>
 
                 </>

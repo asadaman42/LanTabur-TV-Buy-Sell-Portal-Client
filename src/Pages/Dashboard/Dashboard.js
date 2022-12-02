@@ -1,22 +1,24 @@
 import React from 'react';
-import Footer from '../../Shared/Footer';
 import Navbar from '../../Shared/Navbar';
 import { Outlet } from 'react-router-dom';
-import DashboardNavbar from './DashboardNavbar';
 import DashboardSIdebar from './DashboardSIdebar';
+import Footer from '../../Shared/Footer';
 
 const Dashboard = () => {
     return (
         <div className='flex flex-col'>
             <Navbar></Navbar>
             <div className='flex'>
-                <div className='border border-yellow-500'>
+                <div>
                     <DashboardSIdebar></DashboardSIdebar>
                 </div>
-                <div className='flex w-full justify-center items-center'>
+                <div className='w-full mx-2'>
+                    <div className='flex justify-center items-center'>
                     <Outlet></Outlet>
+                    </div>
                 </div>
             </div>
+            <Footer></Footer>
         </div>
     );
 };

@@ -1,55 +1,58 @@
-import React from 'react';
+import React, { useState } from 'react';
+import AccordionLayout from './AccordionLayout';
 
 const Blog = () => {
-    return (
-        <div>
 
-            <div id="accordion-collapse" data-accordion="collapse">
-                <h2 id="accordion-collapse-heading-1">
-                    <button type="button" className="flex items-center justify-between w-full p-5 font-medium text-left text-gray-500 border border-b-0 border-gray-200 rounded-t-xl focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800" data-accordion-target="#accordion-collapse-body-1" aria-expanded="true" aria-controls="accordion-collapse-body-1">
-                        <span>What are the different ways to manage a state in a React application?</span>
-                        <svg data-accordion-icon className="w-6 h-6 rotate-180 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                    </button>
-                </h2>
-                <div id="accordion-collapse-body-1" className="hidden" aria-labelledby="accordion-collapse-heading-1">
-                    <div className="p-5 font-light border border-b-0 border-gray-200 dark:border-gray-700 dark:bg-gray-900">
-                        <p className="mb-2 text-gray-500 dark:text-gray-400">Flowbite is an open-source library of interactive components built on top of Tailwind CSS including buttons, dropdowns, modals, navbars, and more.</p>
-                        <p className="text-gray-500 dark:text-gray-400">Check out this guide to learn how to <a href="/docs/getting-started/introduction/" className="text-blue-600 dark:text-blue-500 hover:underline">get started</a> and start developing websites even faster with components on top of Tailwind CSS.</p>
-                    </div>
-                </div>
-                <h2 id="accordion-collapse-heading-2">
-                    <button type="button" className="flex items-center justify-between w-full p-5 font-medium text-left text-gray-500 border border-b-0 border-gray-200 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800" data-accordion-target="#accordion-collapse-body-2" aria-expanded="false" aria-controls="accordion-collapse-body-2">
-                        <span>How does prototypical inheritance work?</span>
-                        <svg data-accordion-icon className="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                    </button>
-                </h2>
-                <div id="accordion-collapse-body-2" className="hidden" aria-labelledby="accordion-collapse-heading-2">
-                    <div className="p-5 font-light border border-b-0 border-gray-200 dark:border-gray-700">
-                        <p className="mb-2 text-gray-500 dark:text-gray-400">Flowbite is first conceptualized and designed using the Figma software so everything you see in the library has a design equivalent in our Figma file.</p>
-                        <p className="text-gray-500 dark:text-gray-400">Check out the <a href="https://flowbite.com/figma/" className="text-blue-600 dark:text-blue-500 hover:underline">Figma design system</a> based on the utility classes from Tailwind CSS and components from Flowbite.</p>
-                    </div>
-                </div>
-                <h2 id="accordion-collapse-heading-3">
-                    <button type="button" className="flex items-center justify-between w-full p-5 font-medium text-left text-gray-500 border border-gray-200 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-800 dark:border-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800" data-accordion-target="#accordion-collapse-body-3" aria-expanded="false" aria-controls="accordion-collapse-body-3">
-                        <span>What are the differences between Flowbite and Tailwind UI?</span>
-                        <svg data-accordion-icon className="w-6 h-6 shrink-0" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                    </button>
-                </h2>
-                <div id="accordion-collapse-body-3" className="hidden" aria-labelledby="accordion-collapse-heading-3">
-                    <div className="p-5 font-light border border-t-0 border-gray-200 dark:border-gray-700">
-                        <p className="mb-2 text-gray-500 dark:text-gray-400">The main difference is that the core components from Flowbite are open source under the MIT license, whereas Tailwind UI is a paid product. Another difference is that Flowbite relies on smaller and standalone components, whereas Tailwind UI offers sections of pages.</p>
-                        <p className="mb-2 text-gray-500 dark:text-gray-400">However, we actually recommend using both Flowbite, Flowbite Pro, and even Tailwind UI as there is no technical reason stopping you from using the best of two worlds.</p>
-                        <p className="mb-2 text-gray-500 dark:text-gray-400">Learn more about these technologies:</p>
-                        <ul className="pl-5 text-gray-500 list-disc dark:text-gray-400">
-                            <li><a href="https://flowbite.com/pro/" className="text-blue-600 dark:text-blue-500 hover:underline">Flowbite Pro</a></li>
-                            <li><a href="https://tailwindui.com/" rel="nofollow" className="text-blue-600 dark:text-blue-500 hover:underline">Tailwind UI</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+  const [activeIndex, setActiveIndex] = useState(1)
+  return (
 
-        </div>
-    );
+    <div className='flex flex-col justify-center items-center'>
+      <AccordionLayout
+        title="What are the different ways to manage a state in a React application?"
+        index={1}
+        activeIndex={activeIndex}
+        setActiveIndex={setActiveIndex}
+      >
+        There are four main types of state you need to properly manage in your React apps:
+        <br />
+
+        1. Local state
+        <br />
+        2. Global state
+        <br />
+        3. Server state
+        <br />
+        4. URL state
+      </AccordionLayout>
+
+      <AccordionLayout
+        title="How does prototypical inheritance work?"
+        index={2}
+        activeIndex={activeIndex}
+        setActiveIndex={setActiveIndex}
+      >
+        The Prototypal Inheritance is a feature in javascript used to add methods and properties in objects. It is <span className='font-bold'>a method by which an object can inherit the properties and methods of another object</span>. Traditionally, in order to get and set the [[Prototype]] of an object, we use Object. getPrototypeOf and Object.
+      </AccordionLayout>
+
+      <AccordionLayout
+        title="What is a unit test? Why should we write unit tests?"
+        index={3}
+        activeIndex={activeIndex}
+        setActiveIndex={setActiveIndex}
+      >
+        The main objective of unit testing is <span className='font-bold'>to isolate written code to test and determine if it works as intended</span>. Unit testing is an important step in the development process, because if done correctly, it can help detect early flaws in code which may be more difficult to find in later testing stages.
+      </AccordionLayout>
+
+      <AccordionLayout
+        title="React vs. Angular vs. Vue?"
+        index={4}
+        activeIndex={activeIndex}
+        setActiveIndex={setActiveIndex}
+      >
+        <span className='font-bold'>Vue provides higher customizability and hence is easier to learn than Angular or React.</span> Further, Vue has an overlap with Angular and React with respect to their functionality like the use of components. Hence, the transition to Vue from either of the two is an easy option.
+      </AccordionLayout>
+    </div>
+  );
 };
 
 export default Blog;

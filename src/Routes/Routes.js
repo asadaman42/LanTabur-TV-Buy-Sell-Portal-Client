@@ -38,7 +38,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/category/:categoryId',
-                loader: ({ params }) => fetch(`https://lantabur-tv-buy-sell-portal-server.vercel.app/category/${params.categoryId}`),
+                loader: ({ params }) => fetch(`https://lantabur-tv-buy-sell-portal-server-asadaman42.vercel.app/category/${params.categoryId}`),
                 element: <Protected><Category></Category></Protected>
             },
             {

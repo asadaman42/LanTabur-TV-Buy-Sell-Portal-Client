@@ -5,10 +5,9 @@ const useAdmin = email => {
     const [isAdminLoading, setIsAdminLoading] = useState(true);
     useEffect(() => {
         if (email) {
-            fetch(`https://lantabur-tv-buy-sell-portal-server.vercel.app/user/admin/${email}`)
+            fetch(`https://lantabur-tv-buy-sell-portal-server-asadaman42.vercel.app/user/admin/${email}`)
                 .then(res => res.json())
-                .then(data => {
-                    console.log(data);
+                .then(data => {                    
                     setIsAdmin(data.isAdmin);
                     setIsAdminLoading(false);
                 })

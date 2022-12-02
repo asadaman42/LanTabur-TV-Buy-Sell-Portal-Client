@@ -1,4 +1,5 @@
 
+import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { format } from 'date-fns';
 import React, { useContext } from 'react';
@@ -15,6 +16,16 @@ const AddProduct = () => {
     const navigate = useNavigate();
 
 
+    const userUrl = `https://lantabur-tv-buy-sell-portal-server-asadaman42.vercel.app/users/${user.email}`
+    const { data: userFromDB, isLoading, refetch } = useQuery({
+        queryKey: ['email'],
+        queryFn: async () => {
+            const response = await fetch(userUrl);
+            const data = await response.json();
+            return data;
+        }
+    });
+
     const addProduct = (data, e) => {
         const image = data.img[0];
         const formData = new FormData();
@@ -25,8 +36,10 @@ const AddProduct = () => {
                 if (imgData.data.success) {
                     data.picture = imgData.data.data.display_url;
                     data.postingTime = date;
-                    data.sellerName = user?.displayName;                    
-                    fetch(`https://lantabur-tv-buy-sell-portal-server.vercel.app/category/${data.company}`, {
+                    data.sellerName = user?.displayName;
+                    data.isVerified = userFromDB?.isVerified;
+                    data.sellerEmail = user?.email; 
+                    fetch(`https://lantabur-tv-buy-sell-portal-server-asadaman42.vercel.app/category/${data.company}`, {
                         method: "POST",
                         headers: {
                             "content-type": "application/json"
@@ -47,7 +60,7 @@ const AddProduct = () => {
     }
 
 
-    
+
     return (
         <div className='flex justify-center items-center'>
             <form onSubmit={handleSubmit(addProduct)} className="flex flex-col md:w-96 justify-center items-center">

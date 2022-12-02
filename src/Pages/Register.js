@@ -34,11 +34,12 @@ const Register = () => {
         axios.post(url, formData)
             .then(imgData => {
                 if (imgData.data.success) {
-                    data.userImg = imgData.data.data.display_url;
+                    const photoURL = imgData.data.data.display_url;
+                    data.userImg = photoURL; 
                     const { email, password, name, userImg } = data;
 
                     // posting Data to DB
-                    fetch('https://lantabur-tv-buy-sell-portal-server.vercel.app/users', {
+                    fetch('https://lantabur-tv-buy-sell-portal-server-asadaman42.vercel.app/users', { 
                         method: "POST",
                         headers: {
                             "content-type": "application/json"
@@ -53,8 +54,9 @@ const Register = () => {
                                     toast.success('Successfully Registered');
 
                                     // for updating photo and name to firebase
-                                    updatePhotoAndName({ displayName: name, PhotoURL: userImg})
+                                    updatePhotoAndName({ displayName: name, PhotoURL: imgData.data.data.display_url})
                                         .then(() => {
+                                            console.log(imgData.data.data.display_url)
                                             e.target.reset();
                                             navigate("/")
                                         })
