@@ -1,14 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
-import { Circles } from 'react-loader-spinner';
 import { Link, useNavigate, } from 'react-router-dom';
 import { UniversalContext } from '../ContexSupplier/ContexSupplier';
 
 const Navbar = () => {
     const { user, logOut } = useContext(UniversalContext);
-    const navigate = useNavigate();
+        const navigate = useNavigate();
     const userUrl = `https://lantabur-tv-buy-sell-portal-server-asadaman42.vercel.app/users/${user?.email}`
-    const { data: userFromDB, isLoading, refetch } = useQuery({
+    const { data: userFromDB = {} } = useQuery({
         queryKey: ['email'],
         queryFn: async () => {
             const response = await fetch(userUrl);
@@ -16,24 +15,6 @@ const Navbar = () => {
             return data;
         }
     });
-
-    if (isLoading) {
-        return (
-            <div className=' min-h-screen flex justify-center items-center'>
-                <div>
-                    <Circles
-                        height="80"
-                        width="80"
-                        color="#4fa94d"
-                        ariaLabel="circles-loading"
-                        wrapperStyle={{}}
-                        wrapperClass=""
-                        visible={true}
-                    />
-                </div>
-            </div>
-        )
-    }
 
     const signOut = () => {
         // <Navigate to='/dashboard'></Navigate>
@@ -58,7 +39,7 @@ const Navbar = () => {
         }
     </React.Fragment>
     return (
-        <div className="navbar flex justify-between">
+        <nav className="navbar flex justify-between">
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -68,6 +49,7 @@ const Navbar = () => {
                         {menuItems}
                     </ul>
                 </div>
+                <img className=' w-10' src="https://i.ibb.co/HC6BHTd/People-watching-the-news-bro.png" alt="" />
                 <Link to='/' className="btn btn-ghost normal-case text-xl">LanTabur TV Buy Sell Portal</Link>
             </div>
             <div className="navbar-center hidden lg:flex">
@@ -75,7 +57,7 @@ const Navbar = () => {
                     {menuItems}
                 </ul>
             </div>
-        </div>
+        </nav>
     );
 };
 

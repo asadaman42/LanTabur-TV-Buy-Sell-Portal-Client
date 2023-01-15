@@ -27,7 +27,7 @@ const HomePageBanner = () => {
                     ></button>
                 </div>
                 <div className="carousel-inner relative w-full overflow-hidden">
-                    <div className="carousel-item active relative float-left w-full">
+                    <div className="carousel-item active relative float-left w-full max-h-[80vh]">
                         <img
                             src="https://lgads.tv/wp-content/uploads/2021/02/lg-ads-default.jpg"
                             className="block w-full"
@@ -39,18 +39,18 @@ const HomePageBanner = () => {
                                 4K resolution and epic TRU picture engine.</p>
                         </div>
                     </div>
-                    <div className="carousel-item relative float-left w-full">
+                    <div className="carousel-item relative float-left w-full max-h-[80vh]">
                         <img
                             src="https://i.ibb.co/kgfRG5N/led-1.jpg"
                             className="block w-full"
                             alt="..."
                         />
                         <div className="carousel-caption hidden md:block absolute text-center">
-                            <h5 className="text-xl">Experience the power of OLED TVs</h5>
-                            <p>Shop the latest and greatest OLED generation with better contrast, color display and gaming compatibility than ever before. </p>
+                            <h5 className="text-xl text-black">Experience the power of OLED TVs</h5>
+                            <p className='text-black'>Shop the latest and greatest OLED generation with better contrast, color display and gaming compatibility than ever before. </p>
                         </div>
                     </div>
-                    <div className="carousel-item relative float-left w-full">
+                    <div className="carousel-item relative float-left w-full max-h-[80vh]">
                         <img
                             src="https://i.ibb.co/tCCx6Wp/Login-Cover-2.jpg"
                             className="block w-full"

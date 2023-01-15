@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { UniversalContext } from '../ContexSupplier/ContexSupplier';
 
 const Register = () => {
+    
     const navigate = useNavigate();
 
     // Import Context
@@ -25,21 +26,24 @@ const Register = () => {
 
     // react hook form operation and sign up through Email
     const onSubmit = (data, e) => {
-        const image = data.userImg[0];
+        const image = data.userImg;
+        console.log(image);
         const formData = new FormData();
         formData.append('image', image);
         const url = `https://api.imgbb.com/1/upload?key=${imgbbKey}`;
+        console.log(formData);
+
 
         // Getting User Picture link
         axios.post(url, formData)
             .then(imgData => {
                 if (imgData.data.success) {
                     const photoURL = imgData.data.data.display_url;
-                    data.userImg = photoURL; 
-                    const { email, password, name, userImg } = data;
+                    data.userImg = photoURL;
+                    const { email, password, name } = data;
 
                     // posting Data to DB
-                    fetch('https://lantabur-tv-buy-sell-portal-server-asadaman42.vercel.app/users', { 
+                    fetch('https://lantabur-tv-buy-sell-portal-server-asadaman42.vercel.app/users', {
                         method: "POST",
                         headers: {
                             "content-type": "application/json"
@@ -47,22 +51,22 @@ const Register = () => {
                         body: JSON.stringify(data)
                     })
                         .then(res => res.json())
-                        .then(() => {                            
+                        .then(() => {
                             setRegistrationError('');
                             createUserByEmailAndPassword(email, password)
                                 .then(result => {
                                     toast.success('Successfully Registered');
 
                                     // for updating photo and name to firebase
-                                    updatePhotoAndName({ displayName: name, PhotoURL: imgData.data.data.display_url})
+                                    updatePhotoAndName({ displayName: name, PhotoURL: imgData.data.data.display_url })
                                         .then(() => {
-                                            console.log(imgData.data.data.display_url)
+
                                             e.target.reset();
                                             navigate("/")
                                         })
-                                        .catch(er => console.log(er));
+                                        .catch(er => console.error(er));
 
-                                    
+
                                 })
                                 .catch(error => setRegistrationError(error.message))
                         })

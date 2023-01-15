@@ -93,7 +93,7 @@ const Login = () => {
                 <form onSubmit={handleSubmit(onSubmit)} className="px-1 my-4" >
                     <div className="form-control">
                         <label className='label'>Your Email</label>
-                        <input type="email" className="input input-bordered" {...register("email", { required: "Email address is Compulsory", })} />
+                        <input type="email" className="input input-bordered text-black" {...register("email", { required: "Email address is Compulsory", })} />
                         {errors.email && <p className=' text-lime-400 font-bold'> {errors.email.message} </p>}
                     </div>
                     <div className="form-control">

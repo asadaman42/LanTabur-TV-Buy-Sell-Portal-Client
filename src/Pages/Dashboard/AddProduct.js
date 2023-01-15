@@ -17,7 +17,7 @@ const AddProduct = () => {
 
 
     const userUrl = `https://lantabur-tv-buy-sell-portal-server-asadaman42.vercel.app/users/${user.email}`
-    const { data: userFromDB, isLoading, refetch } = useQuery({
+    const { data: userFromDB, isLoading } = useQuery({
         queryKey: ['email'],
         queryFn: async () => {
             const response = await fetch(userUrl);

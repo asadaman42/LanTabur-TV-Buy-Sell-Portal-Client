@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
-import { createContext } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 import { createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import app from '../FireBase/FireBase.config';
-import { useEffect } from 'react';
 import { RotatingLines } from 'react-loader-spinner';
 
 export const UniversalContext = createContext();
@@ -11,22 +9,19 @@ const auth = getAuth(app);
 const ContexSupplier = ({ children }) => {
 
     const [loading, setLoading] = useState(true);
-    const [user, setUser] = useState(null); 
+    const [user, setUser] = useState(null);
 
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, presentUser => {            
+        const unsubscribe = onAuthStateChanged(auth, presentUser => {
             setUser(presentUser);
             setLoading(false);
         });
-        return () => {
-            unsubscribe();
-        };
-
+        return () =>{unsubscribe();};
     }, []);
 
     if (loading) {
         return (
-            <div>
+            <div className=' min-h-screen flex justify-center items-center'>
                 <RotatingLines
                     strokeColor="grey"
                     strokeWidth="5"
@@ -46,7 +41,7 @@ const ContexSupplier = ({ children }) => {
     const emailLoginProvider = (email, password) => {
         setLoading(true);
         return signInWithEmailAndPassword(auth, email, password);
-    }  
+    }
 
     const logOut = () => {
         setLoading(true);
@@ -59,11 +54,10 @@ const ContexSupplier = ({ children }) => {
     };
 
     const updatePhotoAndName = photoAndName => {
-        console.log(photoAndName); 
         return updateProfile(auth.currentUser, photoAndName);
     };
 
-    
+
 
     const contextInformation = {
         createUserByEmailAndPassword,
@@ -75,9 +69,9 @@ const ContexSupplier = ({ children }) => {
 
         googleLogInProvider,
         logOut,
-        
+
         setLoading,
-                
+
         setUser
     };
 

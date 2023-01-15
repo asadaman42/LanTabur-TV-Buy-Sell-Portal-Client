@@ -155,7 +155,7 @@ const AllSellers = () => {
                                             <button onClick={() => makeAdmin(seller._id)} className={seller.role === 'admin' ? "hidden" : "btn btn-primary btn-xs"}> Make Admin </button>
                                         </td>
                                         <td className="py-4 px-6">
-                                            <button onClick={() => deleteUser(seller._id)} className="btn btn-secondary btn-xs font-extrabold" > Delete </button>
+                                            <button onClick={() => deleteUser(seller._id)} className={seller.role === 'admin' ? "hidden" : "btn btn-secondary btn-xs font-extrabold"} > Delete </button>
                                         </td>
                                     </tr>
                             )

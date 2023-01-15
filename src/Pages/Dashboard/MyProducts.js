@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import toast from 'react-hot-toast';
 import { Circles } from 'react-loader-spinner';
 import { Link } from 'react-router-dom';
@@ -11,6 +11,7 @@ const MyProducts = () => {
 
     const sellerProducts = [];
 
+    // const myProductsUrl = `http://localhost:5000/products/${user?.email}`;
     const myProductsUrl = `https://lantabur-tv-buy-sell-portal-server-asadaman42.vercel.app/products/${user?.email}`;
     const { data: myproducts, isLoading, refetch } = useQuery({
         queryKey: ['Buyer'],
@@ -20,6 +21,8 @@ const MyProducts = () => {
             return data;
         }
     });
+
+    myproducts?.forEach(product => (product.products).map(singleProduct => sellerProducts.push(singleProduct)));
 
     if (isLoading) {
         return (
@@ -38,8 +41,6 @@ const MyProducts = () => {
             </div>
         )
     }
-
-    myproducts.forEach(product => (product.products).map(singleProduct => sellerProducts.push(singleProduct)));
 
     const advertise = (advertisementData) => {
         const id = advertisementData._id;
@@ -61,9 +62,8 @@ const MyProducts = () => {
 
 
     const deleteProduct = (id, company) => {
-        const deleteURL = `https://lantabur-tv-buy-sell-portal-server-asadaman42.vercel.app/user/delete/${id}`;
-        console.log(id, company);
-        axios.post(deleteURL, {company})
+        const deleteURL = `https://lantabur-tv-buy-sell-portal-server-asadaman42.vercel.app/myproducts/delete/${id}`;
+        axios.post(deleteURL, { company })
             .then(res => {
                 if (res.data.matchedCount) {
                     toast.success('product deleted');
@@ -79,7 +79,7 @@ const MyProducts = () => {
 
     return (
         <div className='w-max'>
-            <h2 className="2xl text-center"> My Products for Seller </h2>
+            <h2 className="2xl text-center"> Products posted by <span className='font-bold'> Mr. {user?.displayName}</span> </h2>
 
             <Link to='/dashboard/addproduct' > <button className='btn btn-accent flex mx-auto my-5'> Add Product </button> </Link>
 
@@ -111,7 +111,6 @@ const MyProducts = () => {
 
                         {
                             sellerProducts.map(sellerProduct =>
-                                //  console.log(sellerProduct)
                                 <tr key={sellerProduct._id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                                     <td className="p-4 w-32">
                                         <img src={sellerProduct.picture} alt="Apple Watch" />

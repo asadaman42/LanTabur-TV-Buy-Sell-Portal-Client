@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
-import { RotatingLines } from 'react-loader-spinner';
+import { Puff, RotatingLines } from 'react-loader-spinner';
 import { Link } from 'react-router-dom';
 
 const HomePageCategory = () => {
@@ -16,12 +16,15 @@ const HomePageCategory = () => {
 
     if (isLoading) {
         return (
-            <div>
-                <RotatingLines
-                    strokeColor="grey"
-                    strokeWidth="5"
-                    animationDuration="0.75"
-                    width="96"
+            <div className='flex justify-center items-center'>
+                <Puff
+                    height="200"
+                    width="200"
+                    radius={20}
+                    color="#4fa94d"
+                    ariaLabel="puff-loading"
+                    wrapperStyle={{}}
+                    wrapperClass=""
                     visible={true}
                 />
             </div>
@@ -38,7 +41,7 @@ const HomePageCategory = () => {
                     categories.map(
                         category =>
                             <div key={category._id} className="card shadow-xl image-full">
-                                <figure><img src={category.categoryImg}  alt="" /></figure>
+                                <figure><img src={category.categoryImg} alt="" /></figure>
                                 <div className="card-body">
                                     <h2 className="card-title"> {category.categoryName} TV </h2>
                                     <p> All the <span className='font-bold text-white text-2xl'>{category.categoryName}</span> branded TVs are here. </p>
@@ -47,7 +50,7 @@ const HomePageCategory = () => {
                                     </div>
                                 </div>
                             </div>
-                                             
+
                     )}
 
             </div>
