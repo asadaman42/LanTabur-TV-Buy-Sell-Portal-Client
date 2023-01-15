@@ -30,9 +30,9 @@ const AdvertisedItems = () => {
             <div className='flex justify-center items-center'>
                 <div>
                     <RevolvingDot
-                        height="500"
-                        width="500"
-                        radius="40"
+                        height="600"
+                        width="600"
+                        radius="60"
                         color="#4fa94d"
                         secondaryColor=''
                         ariaLabel="revolving-dot-loading"

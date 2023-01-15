@@ -16,11 +16,11 @@ const HomePageCategory = () => {
 
     if (isLoading) {
         return (
-            <div className='flex justify-center items-center'>
+            <div className='flex justify-center items-center'> 
                 <Puff
-                    height="200"
-                    width="200"
-                    radius={20}
+                    height="150"
+                    width="150"
+                    radius={1}
                     color="#4fa94d"
                     ariaLabel="puff-loading"
                     wrapperStyle={{}}
@@ -36,7 +36,7 @@ const HomePageCategory = () => {
             <h4 className=' text-center text-4xl font-bold'>Second Hand TV  Categoires</h4>
 
 
-            <div className='ml-5 grid grid-cols-1 md:grid-cols-3 gap-5 my-7'>
+            <div className='mx-5 grid grid-cols-1 md:grid-cols-3 gap-5 my-7'>
                 {categories &&
                     categories.map(
                         category =>
